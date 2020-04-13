@@ -10,8 +10,12 @@ const useStyles = makeStyles(theme => ({
   content: {
     height: '100%',
     paddingTop: 56,
+    overflow: 'auto',
     [theme.breakpoints.up('sm')]: {
       paddingTop: 64
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingTop: 200,
     }
   }
 }));

@@ -16,11 +16,11 @@ import RegisterForm from './RegisterForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: 'auto',
+    height: '100%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: theme.spacing(6, 2)
+    padding: theme.spacing(6, 2),
   },
   card: {
     width: theme.breakpoints.values.md,
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'unset',
     display: 'flex',
     position: 'relative',
-    marginTop: '5%',
+    margin: '35px 10px 35px 10px',
     '& > *': {
       flexGrow: 1,
       flexBasis: '50%',
@@ -60,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     left: theme.spacing(3),
     height: 64,
     width: 64,
-    fontSize: 32
+    fontSize: 32,
   },
   registerForm: {
     marginTop: theme.spacing(3)
