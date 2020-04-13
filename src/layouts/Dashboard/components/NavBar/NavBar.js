@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: 'fit-content'
   },
   avatar: {
-    width: 60,
-    height: 60
+    width: 90,
+    height: 90
   },
   name: {
     marginTop: theme.spacing(1)
@@ -51,8 +51,6 @@ const NavBar = props => {
     if (openMobile) {
       onMobileClose && onMobileClose();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router.location.pathname]);
 
   const navbarContent = (
@@ -74,6 +72,7 @@ const NavBar = props => {
         <Typography variant="body2">{session.user.bio}</Typography>
       </div>
       <Divider className={classes.divider} />
+      <Divider />
       <nav className={classes.navigation}>
         {navigationConfig.map(list => (
           <Navigation

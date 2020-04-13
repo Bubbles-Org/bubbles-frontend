@@ -20,7 +20,8 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  ClickAwayListener
+  ClickAwayListener,
+  Typography
 } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/LockOutlined';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
@@ -32,6 +33,7 @@ import axios from 'utils/axios';
 import useRouter from 'utils/useRouter';
 import { PricingModal, NotificationsPopover } from 'components';
 import { logout } from 'actions';
+import moment from 'moment';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -89,6 +91,9 @@ const useStyles = makeStyles(theme => ({
   },
   logoutIcon: {
     marginRight: theme.spacing(1)
+  },
+  titleWhite: {
+    color: 'white'
   }
 }));
 
@@ -103,26 +108,33 @@ const TopBar = props => {
   const [pricingModalOpen, setPricingModalOpen] = useState(false);
   const [openSearchPopover, setOpenSearchPopover] = useState(false);
   const [searchValue, setSearchValue] = useState('');
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, ] = useState([
+    {
+      id: 1,
+      title: 'Teste 1',
+      type: 'order',
+      created_at: moment().subtract(2, 'hours')
+    },
+    {
+      id: 2,
+      title: 'Teste 2',
+      type: 'user',
+      created_at: moment().subtract(1, 'day')
+    },
+    {
+      id: 3,
+      title: 'Teste 3',
+      type: 'project',
+      created_at: moment().subtract(3, 'days')
+    },
+    {
+      id: 4,
+      title: 'Teste 4',
+      type: 'feature',
+      created_at: moment().subtract(7, 'days')
+    }
+  ]);
   const [openNotifications, setOpenNotifications] = useState(false);
-
-  useEffect(() => {
-    let mounted = true;
-
-    const fetchNotifications = () => {
-      axios.get('/api/account/notifications').then(response => {
-        if (mounted) {
-          setNotifications(response.data.notifications);
-        }
-      });
-    };
-
-    fetchNotifications();
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
 
   const handleLogout = () => {
     history.push('/auth/login');
@@ -177,10 +189,14 @@ const TopBar = props => {
     >
       <Toolbar>
         <RouterLink to="/">
-          <img
+          <Typography
+            className={classes.titleWhite}
+            variant="h3"
+          >Livraria Porto</Typography>
+          {/* <img
             alt="Logo"
             src="/images/logos/logo--white.svg"
-          />
+          /> */}
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden smDown>
@@ -193,46 +209,10 @@ const TopBar = props => {
               className={classes.searchInput}
               disableUnderline
               onChange={handleSearchChange}
-              placeholder="Search people &amp; places"
+              placeholder="Buscar livros ou usuários"
               value={searchValue}
             />
           </div>
-          <Popper
-            anchorEl={searchRef.current}
-            className={classes.searchPopper}
-            open={openSearchPopover}
-            transition
-          >
-            <ClickAwayListener onClickAway={handleSearchPopverClose}>
-              <Paper
-                className={classes.searchPopperContent}
-                elevation={3}
-              >
-                <List>
-                  {popularSearches.map(search => (
-                    <ListItem
-                      button
-                      key={search}
-                      onClick={handleSearchPopverClose}
-                    >
-                      <ListItemIcon>
-                        <SearchIcon />
-                      </ListItemIcon>
-                      <ListItemText primary={search} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Paper>
-            </ClickAwayListener>
-          </Popper>
-          <Button
-            className={classes.trialButton}
-            onClick={handlePricingOpen}
-            variant="contained"
-          >
-            <LockIcon className={classes.trialIcon} />
-            Trial expired
-          </Button>
         </Hidden>
         <Hidden mdDown>
           <IconButton
@@ -255,7 +235,7 @@ const TopBar = props => {
             onClick={handleLogout}
           >
             <InputIcon className={classes.logoutIcon} />
-            Sign out
+            Sair
           </Button>
         </Hidden>
         <Hidden lgUp>

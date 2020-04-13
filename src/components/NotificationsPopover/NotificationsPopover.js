@@ -39,7 +39,7 @@ const NotificationsPopover = props => {
       }}
     >
       <div className={classes.root}>
-        <CardHeader title="Notifications" />
+        <CardHeader title="Notificações" />
         <Divider />
         {notifications.length > 0 ? (
           <NotificationList notifications={notifications} />
@@ -53,7 +53,7 @@ const NotificationsPopover = props => {
             size="small"
             to="#"
           >
-            See all
+            Ver tudo
           </Button>
         </CardActions>
       </div>

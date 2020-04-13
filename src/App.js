@@ -12,7 +12,6 @@ import { configureStore } from './store';
 import routes from './routes';
 import {
   ScrollReset,
-  GoogleAnalytics,
   CookiesNotification
 } from './components';
 import './mixins/chartjs';
@@ -32,7 +31,6 @@ const App = () => {
         <MuiPickersUtilsProvider utils={MomentUtils}>
           <Router history={history}>
             <ScrollReset />
-            <GoogleAnalytics />
             <CookiesNotification />
             {renderRoutes(routes)}
           </Router>

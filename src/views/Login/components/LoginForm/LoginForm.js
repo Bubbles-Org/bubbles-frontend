@@ -10,13 +10,15 @@ import { Button, TextField } from '@material-ui/core';
 import useRouter from 'utils/useRouter';
 import { login } from 'actions';
 
+const required = { allowEmpty: false, message: 'é obrigatório' };
+
 const schema = {
   email: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: required,
     email: true
   },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' }
+  senha: {
+    presence: required
   }
 };
 
@@ -100,23 +102,23 @@ const LoginForm = props => {
           error={hasError('email')}
           fullWidth
           helperText={hasError('email') ? formState.errors.email[0] : null}
-          label="Email address"
+          label="Email"
           name="email"
           onChange={handleChange}
           value={formState.values.email || ''}
           variant="outlined"
         />
         <TextField
-          error={hasError('password')}
+          error={hasError('senha')}
           fullWidth
           helperText={
-            hasError('password') ? formState.errors.password[0] : null
+            hasError('senha') ? formState.errors.senha[0] : null
           }
-          label="Password"
-          name="password"
+          label="Senha"
+          name="senha"
           onChange={handleChange}
           type="password"
-          value={formState.values.password || ''}
+          value={formState.values.senha || ''}
           variant="outlined"
         />
       </div>
@@ -128,7 +130,7 @@ const LoginForm = props => {
         type="submit"
         variant="contained"
       >
-        Sign in
+        Entrar
       </Button>
     </form>
   );

@@ -15,34 +15,59 @@ import {
 
 import useRouter from 'utils/useRouter';
 
+const required = { allowEmpty: false, message: 'é obrigatório' };
+
+/**
+ * This attributes are in portuguese is just because validate.js get the name of attribute and includes then
+ * in the init of the alert message. For example: The previous attribute name to 'senhas'
+ * it was 'confirmPassword' and the alert message when the 'confirmPassword' does not match
+ * with the attribute 'password', it was 'Confirm password <personalized message>'.
+ * Our interface is in brazilian portuguese and we want to show 'Senhas não correspondem' that mean 'Passwords not match'.
+ * So, for that reason I put the name of the attribute 'senhas'.
+ * - Tiago L. Pereira
+ */
+
 const schema = {
-  firstName: {
-    presence: { allowEmpty: false, message: 'is required' },
+  nome: {
+    presence: required,
     length: {
       maximum: 32
     }
   },
-  lastName: {
-    presence: { allowEmpty: false, message: 'is required' },
+  sobrenome: {
+    presence: required,
     length: {
       maximum: 32
     }
   },
   email: {
-    presence: { allowEmpty: false, message: 'is required' },
+    presence: required,
     email: true,
     length: {
       maximum: 64
     }
   },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
+  senha: {
+    presence: required,
     length: {
       maximum: 128
     }
   },
-  policy: {
-    presence: { allowEmpty: false, message: 'is required' },
+  senhas: {
+    presence: required,
+    equality: {
+      attribute: 'senha',
+      message: 'não correspondem',
+      comparator: (v1, v2) => {
+        return v1 === v2;
+      }
+    },
+    length: {
+      maximum: 128
+    }
+  },
+  termos: {
+    presence: required,
     checked: true
   }
 };
@@ -59,6 +84,7 @@ const useStyles = makeStyles(theme => ({
     }
   },
   policy: {
+    marginLeft: '6px',
     display: 'flex',
     alignItems: 'center'
   },
@@ -129,64 +155,77 @@ const RegisterForm = props => {
     >
       <div className={classes.fields}>
         <TextField
-          error={hasError('firstName')}
+          error={hasError('nome')}
           helperText={
-            hasError('firstName') ? formState.errors.firstName[0] : null
+            hasError('nome') ? formState.errors.nome[0] : null
           }
-          label="First name"
-          name="firstName"
+          label="Nome"
+          name="nome"
           onChange={handleChange}
-          value={formState.values.firstName || ''}
+          value={formState.values.nome || ''}
           variant="outlined"
         />
         <TextField
-          error={hasError('lastName')}
+          error={hasError('sobrenome')}
           helperText={
-            hasError('lastName') ? formState.errors.lastName[0] : null
+            hasError('sobrenome') ? formState.errors.sobrenome[0] : null
           }
-          label="Last name"
-          name="lastName"
+          label="Sobrenome"
+          name="sobrenome"
           onChange={handleChange}
-          value={formState.values.lastName || ''}
+          value={formState.values.sobrenome || ''}
           variant="outlined"
         />
         <TextField
           error={hasError('email')}
           fullWidth
           helperText={hasError('email') ? formState.errors.email[0] : null}
-          label="Email address"
+          label="Email"
           name="email"
           onChange={handleChange}
           value={formState.values.email || ''}
           variant="outlined"
         />
         <TextField
-          error={hasError('password')}
+          error={hasError('senha')}
           fullWidth
           helperText={
-            hasError('password') ? formState.errors.password[0] : null
+            hasError('senha') ? formState.errors.senha[0] : null
           }
-          label="Password"
-          name="password"
+          label="Senha"
+          name="senha"
           onChange={handleChange}
           type="password"
-          value={formState.values.password || ''}
+          value={formState.values.senha || ''}
+          variant="outlined"
+        />
+        <TextField
+          error={hasError('senhas')}
+          fullWidth
+          helperText={
+            hasError('senhas') ? formState.errors.senhas[0] : null
+          }
+          label="Confirmar senha"
+          name="senhas"
+          onChange={handleChange}
+          type="password"
+          value={formState.values.senhas || ''}
           variant="outlined"
         />
         <div>
           <div className={classes.policy}>
             <Checkbox
-              checked={formState.values.policy || false}
+              checked={formState.values.termos || false}
               className={classes.policyCheckbox}
               color="primary"
-              name="policy"
+              name="termos"
               onChange={handleChange}
             />
             <Typography
               color="textSecondary"
               variant="body1"
             >
-              I have read the{' '}
+              Eu li os{' '}
               <Link
                 color="secondary"
                 component={RouterLink}
@@ -194,12 +233,12 @@ const RegisterForm = props => {
                 underline="always"
                 variant="h6"
               >
-                Terms and Conditions
+                Termos e Condições
               </Link>
             </Typography>
           </div>
-          {hasError('policy') && (
-            <FormHelperText error>{formState.errors.policy[0]}</FormHelperText>
+          {hasError('termos') && (
+            <FormHelperText error>{formState.errors.termos[0]}</FormHelperText>
           )}
         </div>
       </div>
@@ -211,7 +250,7 @@ const RegisterForm = props => {
         type="submit"
         variant="contained"
       >
-        Create account
+        Criar conta
       </Button>
     </form>
   );
