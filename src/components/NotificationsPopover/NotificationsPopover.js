@@ -10,8 +10,8 @@ import {
   Button,
   colors
 } from '@material-ui/core';
-
-import { NotificationList, EmptyList } from './components';
+import NotificationList from './NotificationList';
+import EmptyList from './EmptyList';
 
 const useStyles = makeStyles(() => ({
   root: {

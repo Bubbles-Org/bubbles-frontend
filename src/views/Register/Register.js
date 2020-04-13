@@ -10,10 +10,9 @@ import {
   Link,
 } from '@material-ui/core';
 import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
-
 import gradients from 'utils/gradients';
 import { Page } from 'components';
-import { RegisterForm } from './components';
+import RegisterForm from './RegisterForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +28,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'unset',
     display: 'flex',
     position: 'relative',
+    marginTop: '5%',
     '& > *': {
       flexGrow: 1,
       flexBasis: '50%',

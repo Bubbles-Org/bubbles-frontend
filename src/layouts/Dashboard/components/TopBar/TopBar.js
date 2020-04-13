@@ -14,24 +14,14 @@ import {
   Hidden,
   Input,
   colors,
-  Popper,
-  Paper,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ClickAwayListener,
   Typography
 } from '@material-ui/core';
-import LockIcon from '@material-ui/icons/LockOutlined';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-
-import axios from 'utils/axios';
 import useRouter from 'utils/useRouter';
-import { PricingModal, NotificationsPopover } from 'components';
+import { NotificationsPopover } from 'components';
 import { logout } from 'actions';
 import moment from 'moment';
 
@@ -247,10 +237,6 @@ const TopBar = props => {
           </IconButton>
         </Hidden>
       </Toolbar>
-      <PricingModal
-        onClose={handlePricingClose}
-        open={pricingModalOpen}
-      />
       <NotificationsPopover
         anchorEl={notificationsRef.current}
         notifications={notifications}

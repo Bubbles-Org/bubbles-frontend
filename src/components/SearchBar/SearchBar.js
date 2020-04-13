@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
 import { Grid, Button } from '@material-ui/core';
 import FilterListIcon from '@material-ui/icons/FilterList';
-
-import { Search, Filter } from './components';
+import Search from './Search';
+import Filter from './Filter';
 
 const useStyles = makeStyles(theme => ({
   root: {

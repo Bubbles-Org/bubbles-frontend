@@ -13,7 +13,7 @@ import LockIcon from '@material-ui/icons/Lock';
 
 import { Page } from 'components';
 import gradients from 'utils/gradients';
-import { LoginForm } from './components';
+import LoginForm from './LoginForm';
 
 const useStyles = makeStyles(theme => ({
   root: {
