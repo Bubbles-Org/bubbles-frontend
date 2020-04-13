@@ -16,3 +16,5 @@ Em seguida executar o comando:
 npm start
 ```
 
+Pronto, se tudo foi instalado corretamente o front-end deve estar sendo executado. Para informações sobre como executar o backend, acessar o README do repositório do mesmo clicando [aqui](https://github.com/avdLuna/livraria-porto) (permissão necessária).
+
