@@ -14,7 +14,6 @@ import {
   ScrollReset,
   CookiesNotification
 } from './components';
-import './mixins/chartjs';
 import './mixins/moment';
 import './mixins/validate';
 import './mixins/prismjs';
