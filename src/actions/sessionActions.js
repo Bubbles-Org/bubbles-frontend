@@ -38,6 +38,10 @@ export const loginRequest = body => {
           }));
       })
       .catch(error => {
+        dispatch(createNotification({
+          variant: 'error',
+          message: 'Ocorreu um erro ao fazer login'
+        }));
         dispatch(loginFailed(error));
       });
   };
