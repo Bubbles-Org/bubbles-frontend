@@ -4,6 +4,10 @@
   "email": "tiagolprr@gmail.com",
   "licence": "UNLICENSED",
   "version": "1.2.0",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
   "private": true,
   "scripts": {
     "start": "react-scripts start",
