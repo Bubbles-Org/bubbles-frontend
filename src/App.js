@@ -6,32 +6,30 @@ import { Provider as StoreProvider } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { renderRoutes } from 'react-router-config';
-
 import theme from './theme';
-import { configureStore } from './store';
+import store from './store';
 import routes from './routes';
-import {
-  ScrollReset,
-  CookiesNotification
-} from './components';
+import { ScrollReset } from './components';
 import './mixins/moment';
 import './mixins/validate';
 import './mixins/prismjs';
 import './assets/scss/index.scss';
+import CustomNotificationStack from './components/customNotificationStack/CustomNotificationStack';
 
 const history = createBrowserHistory();
-const store = configureStore();
 
 const App = () => {
   return (
     <StoreProvider store={store}>
       <ThemeProvider theme={theme}>
         <MuiPickersUtilsProvider utils={MomentUtils}>
-          <Router history={history}>
-            <ScrollReset />
-            <CookiesNotification />
-            {renderRoutes(routes)}
-          </Router>
+          <>
+            <Router history={history}>
+              <ScrollReset />
+              {renderRoutes(routes)}
+            </Router>
+            <CustomNotificationStack maxSnack={3} />
+          </>
         </MuiPickersUtilsProvider>
       </ThemeProvider>
     </StoreProvider>

@@ -20,10 +20,9 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import useRouter from 'utils/useRouter';
 import { NotificationsPopover } from 'components';
-import { logout } from 'actions';
 import moment from 'moment';
+import { logoutRequest } from 'actions/sessionActions';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -91,7 +90,6 @@ const TopBar = props => {
   const { onOpenNavBarMobile, className, ...rest } = props;
 
   const classes = useStyles();
-  const { history } = useRouter();
   const searchRef = useRef(null);
   const dispatch = useDispatch();
   const notificationsRef = useRef(null);
@@ -127,16 +125,7 @@ const TopBar = props => {
   const [openNotifications, setOpenNotifications] = useState(false);
 
   const handleLogout = () => {
-    history.push('/auth/login');
-    // dispatch(logout());
-  };
-
-  const handlePricingOpen = () => {
-    setPricingModalOpen(true);
-  };
-
-  const handlePricingClose = () => {
-    setPricingModalOpen(false);
+    dispatch(logoutRequest());
   };
 
   const handleNotificationsOpen = () => {

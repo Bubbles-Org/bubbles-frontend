@@ -6,9 +6,8 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
 import { Button, TextField } from '@material-ui/core';
-
+import { loginRequest } from 'actions/sessionActions';
 import useRouter from 'utils/useRouter';
-import { login } from 'actions';
 
 const required = { allowEmpty: false, message: 'é obrigatório' };
 
@@ -84,7 +83,10 @@ const LoginForm = props => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    // dispatch(login());
+    dispatch(loginRequest({
+      email: formState.values.email,
+      password: formState.values.senha
+    }))
     router.history.push('/');
   };
 

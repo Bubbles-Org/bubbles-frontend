@@ -1,32 +1,42 @@
-import * as actionTypes from 'actions';
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_ASYNC_REQUEST_STARTED } from 'actions/sessionActions';
 
+const defaultAvatar = '/images/avatars/corona-mock.png';
 const initialState = {
-  loggedIn: true,
-  user: {
-    first_name: 'Usuário',
-    last_name: 'Teste',
-    email: 'teste@gmail.com',
-    avatar: '/images/avatars/corona-mock.png',
-    bio: 'Gripezinha',
-    role: 'ADMIN' // ['GUEST', 'USER', 'ADMIN']
+  loading: false,
+  loggedIn: false,
+  sessionToken: '',
+  loggedUser: {
+    avatar: defaultAvatar
   }
 };
 
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.SESSION_LOGIN: {
+    case LOGIN_ASYNC_REQUEST_STARTED:
       return {
-        ...initialState
-      };
+        ...initialState,
+        loading: true,
+      }
+    case LOGIN_SUCCESS: {
+      if (!action.payload.token) {
+        return {
+          ...initialState,
+        };
+      }
+      return {
+        ...initialState,
+        loggedIn: true,
+        sessionToken: action.payload.token,
+        loggedUser: { 
+          ...action.payload.decode.user,
+          avatar: defaultAvatar,
+        }
+      }
     }
 
-    case actionTypes.SESSION_LOGOUT: {
+    case LOGOUT_SUCCESS: {
       return {
-        ...state,
-        loggedIn: false,
-        user: {
-          role: 'GUEST'
-        }
+        ...initialState
       };
     }
 

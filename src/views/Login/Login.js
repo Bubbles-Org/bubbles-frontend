@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -10,10 +10,11 @@ import {
   Link,
 } from '@material-ui/core';
 import LockIcon from '@material-ui/icons/Lock';
-
 import { Page } from 'components';
 import gradients from 'utils/gradients';
 import LoginForm from './LoginForm';
+import { useSelector } from 'react-redux';
+import useRouter from 'utils/useRouter';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'unset',
     display: 'flex',
     position: 'relative',
+    margin: 'auto',
     '& > *': {
       flexGrow: 1,
       flexBasis: '50%',
@@ -79,6 +81,15 @@ const useStyles = makeStyles(theme => ({
 
 const Login = () => {
   const classes = useStyles();
+  const session = useSelector(({session}) => session);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.loggedIn && session.sessionToken) {
+      router.history.push('/');
+      return;
+    }
+  }, [session, router])
 
   return (
     <Page

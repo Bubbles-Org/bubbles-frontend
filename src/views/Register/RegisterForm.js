@@ -34,12 +34,6 @@ const schema = {
       maximum: 32
     }
   },
-  sobrenome: {
-    presence: required,
-    length: {
-      maximum: 32
-    }
-  },
   email: {
     presence: required,
     email: true,
@@ -156,6 +150,7 @@ const RegisterForm = props => {
       <div className={classes.fields}>
         <TextField
           error={hasError('nome')}
+          fullWidth
           helperText={
             hasError('nome') ? formState.errors.nome[0] : null
           }
@@ -163,17 +158,6 @@ const RegisterForm = props => {
           name="nome"
           onChange={handleChange}
           value={formState.values.nome || ''}
-          variant="outlined"
-        />
-        <TextField
-          error={hasError('sobrenome')}
-          helperText={
-            hasError('sobrenome') ? formState.errors.sobrenome[0] : null
-          }
-          label="Sobrenome"
-          name="sobrenome"
-          onChange={handleChange}
-          value={formState.values.sobrenome || ''}
           variant="outlined"
         />
         <TextField

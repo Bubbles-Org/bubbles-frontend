@@ -60,16 +60,16 @@ const NavBar = props => {
           alt="Person"
           className={classes.avatar}
           component={RouterLink}
-          src={session.user.avatar}
+          src={session.loggedUser.avatar}
           to="/profile/1/timeline"
         />
         <Typography
           className={classes.name}
           variant="h4"
         >
-          {session.user.first_name} {session.user.last_name}
+          {session.loggedUser.name}
         </Typography>
-        <Typography variant="body2">{session.user.bio}</Typography>
+        <Typography variant="body2">{session.loggedUser.role}</Typography>
       </div>
       <Divider className={classes.divider} />
       <Divider />

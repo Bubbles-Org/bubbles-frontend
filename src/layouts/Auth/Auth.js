@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
       paddingTop: 64
     },
     [theme.breakpoints.down('xs')]: {
-      paddingTop: 200,
+      paddingTop: 86,
     }
   }
 }));

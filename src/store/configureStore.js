@@ -1,22 +1,30 @@
-import { applyMiddleware, createStore, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-// import { createLogger } from 'redux-logger';
+import { applyMiddleware, compose, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import rootReducer from '../reducers';
+import { /*createStateSyncMiddleware,*/ initMessageListener } from 'redux-state-sync';
 
-import rootReducer from 'reducers';
+// const predicate = action => {
+//   const loginActionsRegex = '\\S*LOGIN\\S*';
+//   const sessionActionsRegex = '\\S*SESSION';
+//   const acceptedActionsRegex = new RegExp(`(${loginActionsRegex}|${sessionActionsRegex})`);
+//   return action.type.match(acceptedActionsRegex);
+// };
 
-// const loggerMiddleware = createLogger();
+// const config = {
+//   predicate,
+// };
 
-export default function configureStore(preloadedState = {}) {
-  const middlewares = [thunkMiddleware]; // loggerMiddleware
-  const middlewareEnhancer = composeWithDevTools(
-    applyMiddleware(...middlewares)
+const middlewares = [thunk, /*createStateSyncMiddleware(config)*/];
+
+export default function configureStore(preloadedState) {
+  const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
+  const store = createStore(
+    rootReducer,
+    preloadedState,
+    composeEnhancer(applyMiddleware(...middlewares))
   );
 
-  const enhancers = [middlewareEnhancer];
-  const composedEnhancers = compose(...enhancers);
-
-  const store = createStore(rootReducer, preloadedState, composedEnhancers);
+  initMessageListener(store);
 
   return store;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import {
@@ -13,6 +13,8 @@ import PersonAddIcon from '@material-ui/icons/PersonAddOutlined';
 import gradients from 'utils/gradients';
 import { Page } from 'components';
 import RegisterForm from './RegisterForm';
+import { useSelector } from 'react-redux';
+import useRouter from 'utils/useRouter';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     overflow: 'unset',
     display: 'flex',
     position: 'relative',
-    margin: '35px 10px 35px 10px',
+    margin: 'auto',
     '& > *': {
       flexGrow: 1,
       flexBasis: '50%',
@@ -79,6 +81,15 @@ const useStyles = makeStyles(theme => ({
 
 const Register = () => {
   const classes = useStyles();
+  const session = useSelector(({session}) => session);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session.loggedIn && session.sessionToken) {
+      router.history.push('/');
+      return;
+    }
+  }, [session, router])
 
   return (
     <Page

@@ -10,10 +10,6 @@
       }
     ],
     "jsx-quotes": 1,
-    "linebreak-style": [
-      2,
-      "unix"
-    ],
     "quotes": [
       2,
       "single"
@@ -55,7 +51,8 @@
   },
   "env": {
     "es6": true,
-    "browser": true
+    "browser": true,
+    "node": true
   },
   "extends": "eslint:recommended",
   "ecmaFeatures": {
