@@ -14,6 +14,8 @@ import {
 } from '@material-ui/core';
 
 import useRouter from 'utils/useRouter';
+import { useDispatch } from 'react-redux';
+import { createCustomerRequest } from 'actions/customerActions';
 
 const required = { allowEmpty: false, message: 'é obrigatório' };
 
@@ -95,7 +97,8 @@ const RegisterForm = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
-  const { history } = useRouter();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const [formState, setFormState] = useState({
     isValid: false,
@@ -135,7 +138,12 @@ const RegisterForm = props => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    history.push('/');
+    dispatch(createCustomerRequest({
+      name: formState.values.nome,
+      email: formState.values.email,
+      password: formState.values.senha,
+      role: 'CLIENT'
+    }, router))
   };
 
   const hasError = field =>

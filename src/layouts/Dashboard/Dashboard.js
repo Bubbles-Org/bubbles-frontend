@@ -3,8 +3,9 @@ import { renderRoutes } from 'react-router-config';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
-
-import { NavBar, TopBar } from './components';
+import { AuthGuard } from 'components';
+import NavBar from './NavBar';
+import TopBar from './TopBar';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -50,24 +51,26 @@ const Dashboard = props => {
   };
 
   return (
-    <div className={classes.root}>
-      <TopBar
-        className={classes.topBar}
-        onOpenNavBarMobile={handleNavBarMobileOpen}
-      />
-      <div className={classes.container}>
-        <NavBar
-          className={classes.navBar}
-          onMobileClose={handleNavBarMobileClose}
-          openMobile={openNavBarMobile}
+    <AuthGuard>
+      <div className={classes.root}>
+        <TopBar
+          className={classes.topBar}
+          onOpenNavBarMobile={handleNavBarMobileOpen}
         />
-        <main className={classes.content}>
-          <Suspense fallback={<LinearProgress />}>
-            {renderRoutes(route.routes)}
-          </Suspense>
-        </main>
+        <div className={classes.container}>
+          <NavBar
+            className={classes.navBar}
+            onMobileClose={handleNavBarMobileClose}
+            openMobile={openNavBarMobile}
+          />
+          <main className={classes.content}>
+            <Suspense fallback={<LinearProgress />}>
+              {renderRoutes(route.routes)}
+            </Suspense>
+          </main>
+        </div>
       </div>
-    </div>
+    </AuthGuard>
   );
 };
 

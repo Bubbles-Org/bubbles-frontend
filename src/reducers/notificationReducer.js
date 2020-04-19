@@ -11,9 +11,13 @@ const initialState = {
 const notificationReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_NOTIFICATION:
-      return { data: [...state.data, action.payload] };
+      return {
+        data: [...state.data, action.payload]
+      };
     case DELETE_NOTIFICATION:
-      return { data: state.data.filter(({ id }) => id !== action.id) };
+      return {
+        data: state.data.filter(({ id }) => id !== action.id)
+      };
     case CLEAR_NOTIFICATION:
       return initialState;
     default:

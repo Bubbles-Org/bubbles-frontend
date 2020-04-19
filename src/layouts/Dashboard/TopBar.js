@@ -93,7 +93,6 @@ const TopBar = props => {
   const searchRef = useRef(null);
   const dispatch = useDispatch();
   const notificationsRef = useRef(null);
-  const [pricingModalOpen, setPricingModalOpen] = useState(false);
   const [openSearchPopover, setOpenSearchPopover] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [notifications, ] = useState([
@@ -147,18 +146,6 @@ const TopBar = props => {
       setOpenSearchPopover(false);
     }
   };
-
-  const handleSearchPopverClose = () => {
-    setOpenSearchPopover(false);
-  };
-
-  const popularSearches = [
-    'Devias React Dashboard',
-    'Devias',
-    'Admin Pannel',
-    'Project',
-    'Pages'
-  ];
 
   return (
     <AppBar

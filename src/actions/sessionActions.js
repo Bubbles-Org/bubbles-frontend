@@ -35,7 +35,7 @@ export const loginRequest = body => {
           dispatch(createNotification({
             variant: 'error',
             message: 'Email ou senha incorretos'
-          }))
+          }));
       })
       .catch(error => {
         dispatch(loginFailed(error));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Page, AuthGuard } from 'components';
+import { Page } from 'components';
 import { useSelector } from 'react-redux';
 import { Typography } from '@material-ui/core';
 
@@ -20,30 +20,28 @@ const Overview = () => {
   const session = useSelector(state => state.session);
 
   return (
-    <AuthGuard>
-      <Page
+    <Page
+      className={classes.root}
+      title="Início"
+    >
+      <div
         className={classes.root}
-        title="Início"
       >
-        <div
-          className={classes.root}
+        <Typography
+          component="h1"
+          gutterBottom
+          variant="h3"
         >
-          <Typography
-            component="h1"
-            gutterBottom
-            variant="h3"
-          >
             Bem-vindo, {session.loggedUser.name}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="subtitle1"
-          >
+        </Typography>
+        <Typography
+          gutterBottom
+          variant="subtitle1"
+        >
             Demonstração
-          </Typography>
-        </div>
-      </Page>
-    </AuthGuard>
+        </Typography>
+      </div>
+    </Page>
   );
 };
 

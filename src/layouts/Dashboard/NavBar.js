@@ -2,14 +2,15 @@ import React, { Fragment, useEffect } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/styles';
-import { Drawer, Divider, Paper, Avatar, Typography } from '@material-ui/core';
+import { Drawer, Divider, Paper, Avatar, Typography, Button } from '@material-ui/core';
 import { Hidden } from '@material-ui/core';
-
 import useRouter from 'utils/useRouter';
 import { Navigation } from 'components';
 import navigationConfig from './navigationConfig';
+import { logoutRequest } from 'actions/sessionActions';
+import InputIcon from '@material-ui/icons/Input';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +38,10 @@ const useStyles = makeStyles(theme => ({
   },
   navigation: {
     marginTop: theme.spacing(2)
-  }
+  },
+  logoutIcon: {
+    marginRight: theme.spacing(1)
+  },
 }));
 
 const NavBar = props => {
@@ -46,12 +50,19 @@ const NavBar = props => {
   const classes = useStyles();
   const router = useRouter();
   const session = useSelector(state => state.session);
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(logoutRequest());
+  };
 
   useEffect(() => {
     if (openMobile) {
       onMobileClose && onMobileClose();
     }
-  }, [router.location.pathname, openMobile, onMobileClose]);
+  // eslint-disable-next-line
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.location.pathname]);
 
   const navbarContent = (
     <div className={classes.content}>
@@ -82,6 +93,15 @@ const NavBar = props => {
             title={list.title}
           />
         ))}
+        {openMobile && (
+          <Button
+            color="inherit"
+            onClick={handleLogout}
+          >
+            <InputIcon className={classes.logoutIcon} />
+          Sair
+          </Button>
+        )}
       </nav>
     </div>
   );
