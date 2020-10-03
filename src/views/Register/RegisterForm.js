@@ -15,7 +15,7 @@ import {
 
 import useRouter from 'utils/useRouter';
 import { useDispatch } from 'react-redux';
-import { createCustomerRequest } from 'actions/customerActions';
+import { createUserRequest } from 'actions/customerActions';
 
 const required = { allowEmpty: false, message: 'é obrigatório' };
 
@@ -138,7 +138,7 @@ const RegisterForm = props => {
 
   const handleSubmit = async event => {
     event.preventDefault();
-    dispatch(createCustomerRequest({
+    dispatch(createUserRequest({
       name: formState.values.nome,
       email: formState.values.email,
       password: formState.values.senha,

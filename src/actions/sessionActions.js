@@ -27,7 +27,7 @@ const loginFailed = data => ({
 export const loginRequest = body => {
   return dispatch => {
     dispatch(loginAsyncRequestStarted());
-    Api.post('/auth/login', body)
+    Api.post('/auth', body)
       .then(res => {
         if (res.data.token)
           dispatch(loginSuccess(res));
