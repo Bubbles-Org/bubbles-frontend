@@ -15,7 +15,7 @@ const requestHandler = config => {
   return config;
 };
 
-const serverUrl = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+const serverUrl = process.env.REACT_APP_API_URL || 'https://bubbles-backend.herokuapp.com';
 
 const Api = axios.create({ baseURL: serverUrl });
 
