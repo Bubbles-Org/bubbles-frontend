@@ -17,10 +17,10 @@ const createCustomerFailed = () => ({
   type: CREATE_CUSTOMER_FAILED,
 });
 
-export const createCustomerRequest = (body, router) => {
+export const createUserRequest = (body, router) => {
   return dispatch => {
     dispatch(customerAsyncRequestStarted());
-    Api.post('/customer/create', body)
+    Api.post('/user', body)
       .then(() => {
         dispatch(createCustomerSuccess());
         dispatch(createNotification({
