@@ -31,7 +31,7 @@ const Topbar = props => {
             className={classes.titleWhite}
             variant="h3"
           >
-            Livraria Porto
+            Bubbles
           </Typography>
         </RouterLink>
       </Toolbar>

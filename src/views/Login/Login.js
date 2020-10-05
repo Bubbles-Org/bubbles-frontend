@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/styles';
 import {
   Card,
   CardContent,
-  CardMedia,
   Typography,
   Divider,
   Link,
@@ -25,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(6, 2)
   },
   card: {
-    width: theme.breakpoints.values.md,
+    width: theme.breakpoints.values.sm,
     maxWidth: '100%',
     overflow: 'unset',
     display: 'flex',
@@ -103,7 +102,7 @@ const Login = () => {
             gutterBottom
             variant="h3"
           >
-            Entrar
+            Bubbles - Login
           </Typography>
           <LoginForm className={classes.loginForm} />
           <Divider className={classes.divider} />
@@ -118,20 +117,6 @@ const Login = () => {
             Não possui uma conta?
           </Link>
         </CardContent>
-        <CardMedia
-          className={classes.media}
-          image="/images/auth.png"
-          title="Cover"
-        >
-          <Typography
-            color="inherit"
-            variant="subtitle1"
-          >
-            A leitura engrandece a alma.
-
-            - Voltaire
-          </Typography>
-        </CardMedia>
       </Card>
     </Page>
   );

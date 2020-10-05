@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { LinearProgress } from '@material-ui/core';
 
-import { Topbar } from './components';
-
 const useStyles = makeStyles(theme => ({
   content: {
     height: '100%',
@@ -27,7 +25,6 @@ const Auth = props => {
 
   return (
     <Fragment>
-      <Topbar />
       <main className={classes.content}>
         <Suspense fallback={<LinearProgress />}>
           {renderRoutes(route.routes)}

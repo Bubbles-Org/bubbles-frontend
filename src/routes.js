@@ -67,6 +67,11 @@ const routes = [
         component: OverviewView
       },
       {
+        path: '/bubbles',
+        exact: true,
+        component: lazy(() => import('views/BubblesList/BubblesList'))
+      },
+      {
         component: () => <Redirect to="/errors/error-404" />
       }
     ]

@@ -158,7 +158,7 @@ const TopBar = props => {
           <Typography
             className={classes.titleWhite}
             variant="h3"
-          >Livraria Porto</Typography>
+          >Bubbles</Typography>
           {/* <img
             alt="Logo"
             src="/images/logos/logo--white.svg"
@@ -175,7 +175,7 @@ const TopBar = props => {
               className={classes.searchInput}
               disableUnderline
               onChange={handleSearchChange}
-              placeholder="Buscar livros ou usuários"
+              placeholder="Buscar bolhas"
               value={searchValue}
             />
           </div>
