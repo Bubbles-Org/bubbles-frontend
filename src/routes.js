@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import AuthLayout from './layouts/Auth';
 import ErrorLayout from './layouts/Error';
 import DashboardLayout from './layouts/Dashboard';
-import OverviewView from './views/Overview';
 
 const routes = [
   {
@@ -61,11 +60,6 @@ const routes = [
     route: '*',
     component: DashboardLayout,
     routes: [
-      {
-        path: '/home',
-        exact: true,
-        component: OverviewView
-      },
       {
         path: '/bubbles',
         exact: true,
