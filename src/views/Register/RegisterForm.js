@@ -15,7 +15,7 @@ import {
 
 import useRouter from 'utils/useRouter';
 import { useDispatch } from 'react-redux';
-import { createUserRequest } from 'actions/customerActions';
+import { createUserRequest } from 'actions/userActions';
 
 const required = { allowEmpty: false, message: 'é obrigatório' };
 

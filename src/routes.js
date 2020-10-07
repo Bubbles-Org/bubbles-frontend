@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import AuthLayout from './layouts/Auth';
 import ErrorLayout from './layouts/Error';
 import DashboardLayout from './layouts/Dashboard';
-import OverviewView from './views/Overview';
 
 const routes = [
   {
@@ -62,9 +61,9 @@ const routes = [
     component: DashboardLayout,
     routes: [
       {
-        path: '/home',
+        path: '/bubbles',
         exact: true,
-        component: OverviewView
+        component: lazy(() => import('views/BubblesList/BubblesList'))
       },
       {
         component: () => <Redirect to="/errors/error-404" />
