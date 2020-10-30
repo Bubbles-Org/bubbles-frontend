@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
+// import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
 import {
   Avatar,
@@ -23,7 +23,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 import getInitials from 'utils/getInitials';
-import { Label } from 'components';
+// import { Label } from 'components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -83,9 +83,9 @@ const BubbleCard = props => {
         avatar={
           <Avatar
             alt="Author"
-            src={bubble.author.avatar}
+            src={bubble.author?.avatar || "/images/avatars/corona-mock.png"}
           >
-            {getInitials(bubble.author.name)}
+            {getInitials(bubble.name)}
           </Avatar>
         }
         className={classes.header}
@@ -99,9 +99,9 @@ const BubbleCard = props => {
               to="/profile/1/timeline"
               variant="h6"
             >
-              {bubble.author.name}
+              {/*bubble.users?.filter(user => user.role === 'owner')[0] ||*/ "Sem criador"}
             </Link>{' '}
-            | Updated: {moment(bubble.updated_at).fromNow()}
+            | Updated: {/*moment(bubble.updated_at).fromNow()*/}
           </Typography>
         }
         title={
@@ -111,7 +111,7 @@ const BubbleCard = props => {
             to="/bubbles/1/overview"
             variant="h5"
           >
-            {bubble.title}
+            {bubble.name || "Sem nome"}
           </Link>
         }
       />
@@ -125,14 +125,14 @@ const BubbleCard = props => {
           </Typography>
         </div>
         <div className={classes.tags}>
-          {bubble.tags.map(tag => (
+          {/* {bubble.tags.map(tag => (
             <Label
               color={tag.color}
               key={tag.text}
             >
               {tag.text}
             </Label>
-          ))}
+          ))} */}
         </div>
         <Divider />
         <div className={classes.details}>

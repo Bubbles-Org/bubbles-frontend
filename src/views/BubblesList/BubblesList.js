@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
 
-import { Page } from 'components';
+import { Page, AuthGuard } from 'components';
 import { Header, Results } from './components';
 
 const useStyles = makeStyles(theme => ({
@@ -26,13 +26,15 @@ const BubblesList = () => {
   const classes = useStyles();
 
   return (
-    <Page
-      className={classes.root}
-      title="Bubbles List"
-    >
-      <Header className={classes.header} />
-      <Results className={classes.results} />
-    </Page>
+    <AuthGuard>
+      <Page
+        className={classes.root}
+        title="Bubbles List"
+      >
+        <Header className={classes.header} />
+        <Results className={classes.results} />
+      </Page>
+    </AuthGuard>
   );
 };
 

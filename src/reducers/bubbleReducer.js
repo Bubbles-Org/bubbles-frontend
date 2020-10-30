@@ -12,7 +12,7 @@ import {
     loading: false,
   };
   
-const notificationReducer = (state = initialState, action) => {
+const bubbleReducer = (state = initialState, action) => {
     switch (action.type) {
         case BUBBLE_ASYNC_REQUEST_STARTED:
             return {
@@ -36,4 +36,4 @@ const notificationReducer = (state = initialState, action) => {
     }
 };
 
-export default notificationReducer;
+export default bubbleReducer;

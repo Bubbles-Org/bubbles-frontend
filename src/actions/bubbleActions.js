@@ -23,7 +23,7 @@ export const createBubbleRequest = (body) => {
   return dispatch => {
     dispatch(bubbleAsyncRequestStarted());
     Api.post('/bubble', body)
-      .then(() => {
+      .then((response) => {
         dispatch(createBubbleSuccess());
         dispatch(createNotification({
           variant: 'success',
@@ -55,15 +55,11 @@ export const getBubblesRequest = () => {
         Api.get('/bubble')
         .then((response) => {
             dispatch(getBubblesSuccess(response.data));
-            dispatch(createNotification({
-            variant: 'success',
-            message: 'Bolha criada com sucesso'
-            }));
         })
         .catch(error => {
             dispatch(createNotification({
             variant: 'error',
-            message: 'Ocorreu um erro ao criar bolha'
+            message: 'Ocorreu um erro ao listar bolhas'
             }));
             dispatch(getBubblesFailed(error));
         });
