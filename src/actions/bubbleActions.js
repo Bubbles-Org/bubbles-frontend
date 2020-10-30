@@ -23,7 +23,7 @@ export const createBubbleRequest = (body) => {
   return dispatch => {
     dispatch(bubbleAsyncRequestStarted());
     Api.post('/bubble', body)
-      .then((response) => {
+      .then(() => {
         dispatch(createBubbleSuccess());
         dispatch(createNotification({
           variant: 'success',
