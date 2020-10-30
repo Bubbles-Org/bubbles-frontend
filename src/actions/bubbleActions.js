@@ -11,8 +11,9 @@ export const bubbleAsyncRequestStarted = () => ({
   type: BUBBLE_ASYNC_REQUEST_STARTED
 });
 
-const createBubbleSuccess = () => ({
+const createBubbleSuccess = (payload) => ({
   type: CREATE_BUBBLE_SUCCESS,
+  payload
 });
 
 const createBubbleFailed = () => ({
@@ -23,8 +24,8 @@ export const createBubbleRequest = (body) => {
   return dispatch => {
     dispatch(bubbleAsyncRequestStarted());
     Api.post('/bubble', body)
-      .then(() => {
-        dispatch(createBubbleSuccess());
+      .then((response) => {
+        dispatch(createBubbleSuccess(response.data));
         dispatch(createNotification({
           variant: 'success',
           message: 'Bolha criada com sucesso'

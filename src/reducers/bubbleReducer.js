@@ -25,8 +25,13 @@ const bubbleReducer = (state = initialState, action) => {
                 loading: false,
                 bubbles: action.payload
             };
-        case GET_BUBBLES_FAILED:
         case CREATE_BUBBLE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                bubbles: state.bubbles.concat([action.payload])
+            };
+        case GET_BUBBLES_FAILED:
         case CREATE_BUBBLE_FAILED:
             return {
                 ...initialState
