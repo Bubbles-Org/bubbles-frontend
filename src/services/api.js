@@ -10,7 +10,7 @@ const handleError = error => {
 const requestHandler = config => {
   token = getToken();
   if (token) {
-    config.headers.Authorization = token;
+    config.headers.authorization = `Bearer ${token}`;
   }
   return config;
 };

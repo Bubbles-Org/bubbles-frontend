@@ -13,7 +13,7 @@ import {
   TextField
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createBubbleRequest } from 'actions/bubbleActions';
 
 const useStyles = makeStyles(theme => ({
@@ -27,10 +27,10 @@ const Header = props => {
   const { className, ...rest } = props;
   const dispatch = useDispatch();
   const classes = useStyles();
+  const session = useSelector(({session}) => session);
   const [openCreate, setOpenCreate] = useState(false);
   const [values, setValues] = useState({
-    title: '',
-    description: '',
+    name: '',
   });
 
   const handleFieldChange = (event, field, value) => {
@@ -42,7 +42,17 @@ const Header = props => {
   };
 
   const handleCreate = () => {
-    dispatch(createBubbleRequest(values))
+    dispatch(
+      createBubbleRequest({
+        name: values.name,
+        users: [
+          {
+            userId: session.loggedUser.id,
+            role: 'owner',
+          }
+        ]
+      })
+    );
     setOpenCreate(false);
   };
 
@@ -83,26 +93,13 @@ const Header = props => {
             autoFocus
             required
             margin="dense"
-            id="title"
-            label="Título"
+            id="name"
+            label="Nome"
             type="text"
             onChange={event =>
-              handleFieldChange(event, "title", event.target.value)
+              handleFieldChange(event, "name", event.target.value)
             }
-            value={values.title}
-            fullWidth
-          />
-          <TextField
-            required
-            multiline
-            margin="dense"
-            id="description"
-            label="Descrição"
-            type="text"
-            onChange={event =>
-              handleFieldChange(event, "description", event.target.value)
-            }
-            value={values.description}
+            value={values.name}
             fullWidth
           />
         </DialogContent>
