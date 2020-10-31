@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-import moment from 'moment';
+// import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
 import {
   Button,
@@ -14,11 +14,11 @@ import {
 import { ToggleButtonGroup, ToggleButton } from '@material-ui/lab';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import { colors } from '@material-ui/core';
+// import { colors } from '@material-ui/core';
 import { Paginate } from 'components';
 import BubbleCard from './BubbleCard';
-// import { getBubblesRequest } from 'actions/bubbleActions';
-// import { useDispatch, useSelector } from 'react-redux';
+import { getBubblesRequest } from 'actions/bubbleActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -59,51 +59,19 @@ const useStyles = makeStyles(theme => ({
 
 const Bubbles = props => {
   const { className, ...rest } = props;
-  // const { bubbles, loading } = useSelector(({ bubbles }) => bubble);
-  // const dispatch = useDispatch();
+  const { bubbles, loading } = useSelector(({ bubble }) => bubble);
+  const session = useSelector(({session}) => session);
+  const dispatch = useDispatch();
   const classes = useStyles();
   const sortRef = useRef(null);
   const [openSort, setOpenSort] = useState(false);
   const [selectedSort, setSelectedSort] = useState('Mais recente');
   const [mode, setMode] = useState('grid');
-  const [bubbles, setBubbles] = useState([]);
-
-  const bubble = (id) => ({
-    id: id,
-    title: 'Sci-Fi',
-    author: {
-      name: 'Anje Keizer',
-      avatar: '/images/avatars/avatar_5.png'
-    },
-    price: '12,500',
-    currency: '$',
-    type: 'Full-Time',
-    location: 'Europe',
-    status: 'In progress',
-    members: 5,
-    tags: [
-      {
-        text: 'Cinema',
-        color: colors.green[600]
-      }
-    ],
-    start_date: moment(),
-    end_date: moment(),
-    updated_at: moment().subtract(24, 'minutes')
-  });
 
   useEffect(() => {
-    const list = [];
-    for (let index = 0; index < 5; index++) {
-      list.push(bubble(index));
-    }
-    
-    setBubbles(list);
-  }, []);
-
-  // useEffect(() => {
-  //   dispatch(getBubblesRequest())
-  // }, [dispatch]);
+    if (session.sessionToken)
+      dispatch(getBubblesRequest())
+  }, [dispatch, session]);
 
   const handleSortOpen = () => {
     setOpenSort(true);
@@ -122,7 +90,7 @@ const Bubbles = props => {
     setMode(value);
   };
 
-  return (
+  return !loading && (
     <div
       {...rest}
       className={clsx(classes.root, className)}
@@ -162,7 +130,7 @@ const Bubbles = props => {
         {bubbles.map(bubble => (
           <Grid
             item
-            key={bubble.id}
+            key={bubble._id}
             md={mode === 'grid' ? 4 : 12}
             sm={mode === 'grid' ? 6 : 12}
             xs={12}
