@@ -12,6 +12,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import { Page } from 'components';
 import gradients from 'utils/gradients';
 import LoginForm from './LoginForm';
+import LoginGoogleForm from './LoginGoogle/LoginGoogleForm';
 import { useSelector } from 'react-redux';
 import useRouter from 'utils/useRouter';
 
@@ -105,6 +106,7 @@ const Login = () => {
             Bubbles - Login
           </Typography>
           <LoginForm className={classes.loginForm} />
+          <LoginGoogleForm className={classes.LoginGoogleForm} />
           <Divider className={classes.divider} />
           <Link
             align="center"
