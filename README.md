@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Bubbles-Org/bubbles-frontend.svg?branch=master)](https://travis-ci.org/Bubbles-Org/bubbles-frontend)
 # bubbles-front
 
 Fron-end da aplicação [Bubbles](https://github.com/Bubbles-Org/bubbles-backend).
