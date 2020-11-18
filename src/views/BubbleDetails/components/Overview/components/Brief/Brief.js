@@ -27,7 +27,7 @@ const Brief = props => {
               <Label
               color={colors.blue[200]}
               >
-                {recomendation}
+                {recomendation.text}
               </Label>
             </div>
           )
