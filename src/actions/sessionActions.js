@@ -47,6 +47,29 @@ export const loginRequest = body => {
   };
 };
 
+export const loginGoogleRequest = body => {
+  return dispatch => {
+    dispatch(loginAsyncRequestStarted());
+    Api.post('/auth/google', body)
+      .then(res => {
+        if (res.data.token)
+          dispatch(loginSuccess(res));
+        else
+          dispatch(createNotification({
+            variant: 'error',
+            message: 'Email ou senha incorretos'
+          }));
+      })
+      .catch(error => {
+        dispatch(createNotification({
+          variant: 'error',
+          message: 'Ocorreu um erro ao fazer login'
+        }));
+        dispatch(loginFailed(error));
+      });
+  };
+};
+
 const logoutSuccess = () => ({
   type: LOGOUT_SUCCESS,
 });
