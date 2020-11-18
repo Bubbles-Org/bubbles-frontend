@@ -7,3 +7,4 @@ export { default as Paginate } from './Paginate/Paginate';
 export { default as ScrollReset } from './ScrollReset/ScrollReset';
 export { default as SearchBar } from './SearchBar/SearchBar';
 export { default as Label } from './Label';
+export { default as Markdown } from './Markdown';

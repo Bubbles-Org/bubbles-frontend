@@ -21,6 +21,7 @@ import {
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import useRouter from 'utils/useRouter';
 
 import getInitials from 'utils/getInitials';
 // import { Label } from 'components';
@@ -61,7 +62,8 @@ const useStyles = makeStyles(theme => ({
 
 const BubbleCard = props => {
   const { bubble, className, ...rest } = props;
-
+  
+  const router = useRouter();
   const classes = useStyles();
 
   const [liked, setLiked] = useState(bubble.liked);
@@ -72,6 +74,10 @@ const BubbleCard = props => {
 
   const handleUnlike = () => {
     setLiked(false);
+  };
+
+  const goToDetails = (bubbleId) => {
+    router.history.push(`/bubbles/view/${bubbleId}`);
   };
 
   return (
@@ -96,12 +102,12 @@ const BubbleCard = props => {
             <Link
               color="textPrimary"
               component={RouterLink}
-              to="/profile/1/timeline"
+              to=""
               variant="h6"
             >
-              {/*bubble.users?.filter(user => user.role === 'owner')[0] ||*/ "Sem criador"}
+              { bubble.users?.filter(user => user.role === 'owner')[0].userId.name }
             </Link>{' '}
-            | Updated: {/*moment(bubble.updated_at).fromNow()*/}
+            | {/* | Updated: moment(bubble.updated_at).fromNow() */}
           </Typography>
         }
         title={
@@ -175,6 +181,7 @@ const BubbleCard = props => {
               <Button
                 className={classes.learnMoreButton}
                 size="small"
+                onClick={() => goToDetails(bubble._id)}
               >
                 Detalhes
               </Button>
