@@ -89,7 +89,7 @@ const BubbleCard = props => {
         avatar={
           <Avatar
             alt="Author"
-            src={bubble.author?.avatar || "/images/avatars/corona-mock.png"}
+            src={bubble.author?.avatar || "/images/avatars/avatar-mock.jpg"}
           >
             {getInitials(bubble.name)}
           </Avatar>

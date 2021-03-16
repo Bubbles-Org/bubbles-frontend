@@ -1,6 +1,6 @@
 import { LOGIN_SUCCESS, LOGOUT_SUCCESS, LOGIN_ASYNC_REQUEST_STARTED } from 'actions/sessionActions';
 
-const defaultAvatar = '/images/avatars/corona-mock.png';
+const defaultAvatar = '/images/avatars/avatar-mock.jpg';
 const initialState = {
   loading: false,
   loggedIn: false,
