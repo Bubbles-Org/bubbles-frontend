@@ -121,30 +121,9 @@ const TopBar = props => {
       created_at: moment().subtract(7, 'days')
     }
   ]);
-  const [openNotifications, setOpenNotifications] = useState(false);
 
   const handleLogout = () => {
     dispatch(logoutRequest());
-  };
-
-  const handleNotificationsOpen = () => {
-    setOpenNotifications(true);
-  };
-
-  const handleNotificationsClose = () => {
-    setOpenNotifications(false);
-  };
-
-  const handleSearchChange = event => {
-    setSearchValue(event.target.value);
-
-    if (event.target.value) {
-      if (!openSearchPopover) {
-        setOpenSearchPopover(true);
-      }
-    } else {
-      setOpenSearchPopover(false);
-    }
   };
 
   return (
@@ -165,36 +144,7 @@ const TopBar = props => {
           /> */}
         </RouterLink>
         <div className={classes.flexGrow} />
-        <Hidden smDown>
-          <div
-            className={classes.search}
-            ref={searchRef}
-          >
-            <SearchIcon className={classes.searchIcon} />
-            <Input
-              className={classes.searchInput}
-              disableUnderline
-              onChange={handleSearchChange}
-              placeholder="Buscar bolhas"
-              value={searchValue}
-            />
-          </div>
-        </Hidden>
         <Hidden mdDown>
-          <IconButton
-            className={classes.notificationsButton}
-            color="inherit"
-            onClick={handleNotificationsOpen}
-            ref={notificationsRef}
-          >
-            <Badge
-              badgeContent={notifications.length}
-              classes={{ badge: classes.notificationsBadge }}
-              variant="dot"
-            >
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
           <Button
             className={classes.logoutButton}
             color="inherit"
@@ -213,12 +163,6 @@ const TopBar = props => {
           </IconButton>
         </Hidden>
       </Toolbar>
-      <NotificationsPopover
-        anchorEl={notificationsRef.current}
-        notifications={notifications}
-        onClose={handleNotificationsClose}
-        open={openNotifications}
-      />
     </AppBar>
   );
 };

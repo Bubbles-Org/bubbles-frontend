@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-// import moment from 'moment';
+
 import { makeStyles } from '@material-ui/styles';
 import {
   Avatar,
@@ -19,14 +19,11 @@ import {
   colors
 } from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import useRouter from 'utils/useRouter';
-
+import moment from 'moment';
 import getInitials from 'utils/getInitials';
-// import { Label } from 'components';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   header: {
     paddingBottom: 0
@@ -60,74 +57,57 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const BubbleCard = props => {
+const BubbleCard = (props) => {
   const { bubble, className, ...rest } = props;
-  
+
   const router = useRouter();
   const classes = useStyles();
-
-  const [liked, setLiked] = useState(bubble.liked);
-
-  const handleLike = () => {
-    setLiked(true);
-  };
-
-  const handleUnlike = () => {
-    setLiked(false);
-  };
 
   const goToDetails = (bubbleId) => {
     router.history.push(`/bubbles/view/${bubbleId}`);
   };
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardHeader
-        avatar={
-          <Avatar
-            alt="Author"
-            src={bubble.author?.avatar || "/images/avatars/avatar-mock.jpg"}
-          >
-            {getInitials(bubble.name)}
-          </Avatar>
-        }
-        className={classes.header}
-        disableTypography
-        subheader={
-          <Typography variant="body2">
-            by{' '}
-            <Link
-              color="textPrimary"
-              component={RouterLink}
-              to=""
-              variant="h6"
-            >
-              { bubble.users?.filter(user => user.role === 'owner')[0].userId.name }
-            </Link>{' '}
-            | {/* | Updated: moment(bubble.updated_at).fromNow() */}
-          </Typography>
-        }
-        title={
-          <Link
-            color="textPrimary"
-            component={RouterLink}
-            to="/bubbles/1/overview"
-            variant="h5"
-          >
-            {bubble.name || "Sem nome"}
-          </Link>
-        }
-      />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <Link
+        color="textPrimary"
+        component={RouterLink}
+        to={`/bubbles/view/${bubble._id}`}
+        variant="h5">
+        <CardHeader
+          avatar={
+            <Avatar
+              alt="Author"
+              src={bubble.author?.avatar || '/images/avatars/avatar-mock.jpg'}>
+              {getInitials(bubble.name)}
+            </Avatar>
+          }
+          className={classes.header}
+          disableTypography
+          subheader={
+            <Typography variant="body2">
+              by{' '}
+              <Link
+                color="textPrimary"
+                component={RouterLink}
+                to=""
+                variant="h6">
+                {
+                  bubble.users?.filter((user) => user.role === 'owner')[0]
+                    .userId.name
+                }
+              </Link>
+              <br />
+              {`Atualizada: ${moment(bubble.updated_at).fromNow()}`}
+            </Typography>
+          }
+          title={bubble.name || 'Sem nome'}
+        />
+      </Link>
       <CardContent className={classes.content}>
         <div className={classes.description}>
-          <Typography
-            colo="textSecondary"
-            variant="subtitle2"
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <Typography colo="textSecondary" variant="subtitle2">
+            {bubble.description}
           </Typography>
         </div>
         <div className={classes.tags}>
@@ -146,43 +126,17 @@ const BubbleCard = props => {
             alignItems="center"
             container
             justify="space-between"
-            spacing={3}
-          >
+            spacing={3}>
             <Grid item>
-              {liked ? (
-                <Tooltip title="Unlike">
-                  <IconButton
-                    className={classes.likedButton}
-                    onClick={handleUnlike}
-                    size="small"
-                  >
-                    <FavoriteIcon />
-                  </IconButton>
-                </Tooltip>
-              ) : (
-                <Tooltip title="Like">
-                  <IconButton
-                    className={classes.likeButton}
-                    onClick={handleLike}
-                    size="small"
-                  >
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                </Tooltip>
-              )}
               <Tooltip title="Share">
-                <IconButton
-                  className={classes.shareButton}
-                  size="small"
-                >
+                <IconButton className={classes.shareButton} size="small">
                   <ShareIcon />
                 </IconButton>
               </Tooltip>
               <Button
                 className={classes.learnMoreButton}
                 size="small"
-                onClick={() => goToDetails(bubble._id)}
-              >
+                onClick={() => goToDetails(bubble._id)}>
                 Detalhes
               </Button>
             </Grid>
